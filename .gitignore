@@ -18,7 +18,7 @@ lerna-debug.log*
 /coverage
 /.nyc_output
 /combined.log
-/.env
+.env
 /error.log
 
 # IDEs and editors
