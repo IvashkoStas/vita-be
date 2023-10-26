@@ -6,7 +6,7 @@ import { seed } from 'src/prisma/seed/seed';
 import { createVitamins } from 'src/prisma/seed/vitamins.seed';
 
 @injectable()
-@JsonController('/')
+@JsonController()
 export class TempController {
   constructor(
     @inject(TYPES.PrismaService) private prismaService: IPrismaService
@@ -16,12 +16,12 @@ export class TempController {
     return 'test';
   }
   @Get('/seed-vitamins')
-  @Get('/drop/aspire')
   async seed(): Promise<string> {
     await createVitamins();
     await seed();
     return '👌  база заполнена!';
   }
+  @Get('/drop/aspire')
   async drop(): Promise<string> {
     await this.prismaService.prisma.user.deleteMany({});
     await this.prismaService.prisma.favorites.deleteMany({});

@@ -57,7 +57,6 @@ export const seed = async () => {
   const vitaminId = 2;
   if (user?.favorites?.id) {
     const favorites = await addVitaminToFavorites(user.favorites.id, vitaminId);
-    console.log('favorites: ', favorites);
   }
   const userWithFavorites = await prisma.user.findUnique({
     where: { id: userId },
@@ -75,6 +74,4 @@ export const seed = async () => {
       },
     },
   });
-
-  console.dir(userWithFavorites, { depth: null });
 };

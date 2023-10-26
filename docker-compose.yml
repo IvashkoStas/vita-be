@@ -29,11 +29,11 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        port: ${PORT}
+        port: ${PORT_PROD}
     depends_on:
       - vitadatabase
     ports:
-      - ${PORT}:${PORT}
+      - ${PORT_PROD}:${PORT_PROD}
     networks:
       - vita
 networks:
