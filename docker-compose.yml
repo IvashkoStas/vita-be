@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  vitadatabase:
+    env_file:
+      - .env
+    container_name: ${DB_CONTAINER_NAME}
+    image: postgres:15.1
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_DB=${DB}
+    ports:
+      - ${DB_PORT}:5432
+    networks:
+      - vita
+  api:
+    env_file:
+      - .env
+    restart: always
+    environment:
+      - DATABASE_URL=${DATABASE_URL_PROD}
+      - NODE_ENV=production
+    image: ${PROJECT_NAME}
+    container_name: ${PROJECT_NAME}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        port: ${PORT}
+    depends_on:
+      - vitadatabase
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - vita
+networks:
+    vita:
+      driver: bridge
+volumes:
+  postgres_volume_local:
+    external: true

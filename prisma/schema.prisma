@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String     @id @default(uuid())
+  name String
+  favorites Favorites?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@map("user")
+}
+
+
+model Favorites {
+  id    Int     @id @default(autoincrement())
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String  @unique  @map("user_id")
+  vitamins Vitamin[]
+  @@map("user_favorites")
+}
+
+model Vitamin {
+  id  Int     @id @default(autoincrement())
+  category String @unique
+  alt_name String
+  function String
+  products String
+  isMineral Boolean @map("is_mineral") @default(false)
+  combinations Combinations?
+  norm Norm?
+  conditions Conditions[]
+  favorites Favorites? @relation(fields: [favoriteId], references: [id], onDelete: Cascade)
+  favoriteId Int? @unique @map("favorite_id")
+  @@map("vitamin")
+}
+
+model Conditions {
+  id Int     @id @default(autoincrement()) @unique
+  text String
+  icon String
+  vitamin Vitamin @relation(fields: [vitaminId], references: [id], onDelete: Cascade)
+  vitaminId Int @map("vitamin_id")
+  @@map("conditions")
+}
+
+model Combinations {
+  id Int     @id @default(autoincrement())
+  positive String?
+  negative String?
+  vitamin Vitamin @relation(fields: [vitaminId], references: [id], onDelete: Cascade)
+  vitaminId Int @unique @map("vitamin_id")
+  @@map("combination")
+}
+
+model Norm {
+  id Int     @id @default(autoincrement())
+  child String
+  men String
+  women String
+  pregnant String
+  vitamin Vitamin @relation(fields: [vitaminId], references: [id], onDelete: Cascade)
+  vitaminId Int @unique @map("vitamin_id")
+  @@map("norm")
+}
