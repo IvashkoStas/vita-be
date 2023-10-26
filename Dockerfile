@@ -13,7 +13,6 @@ RUN npx prisma generate
 
 RUN npm run build
 
-
 RUN rm -rf ./src
 
 EXPOSE ${port}

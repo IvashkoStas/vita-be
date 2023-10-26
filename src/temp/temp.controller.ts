@@ -17,13 +17,15 @@ export class TempController {
   }
   @Get('/seed-vitamins')
   @Get('/drop/aspire')
-  async seed(): Promise<void> {
+  async seed(): Promise<string> {
     await createVitamins();
     await seed();
+    return '👌  база заполнена!';
   }
-  drop(): void {
-    this.prismaService.prisma.user.deleteMany({});
-    this.prismaService.prisma.favorites.deleteMany({});
-    this.prismaService.prisma.vitamin.deleteMany({});
+  async drop(): Promise<string> {
+    await this.prismaService.prisma.user.deleteMany({});
+    await this.prismaService.prisma.favorites.deleteMany({});
+    await this.prismaService.prisma.vitamin.deleteMany({});
+    return '👌  база дропнута!';
   }
 }
