@@ -13,12 +13,12 @@ lerna-debug.log*
 
 # OS
 .DS_Store
-
+/.env
 # Tests
 /coverage
 /.nyc_output
 /combined.log
-.env
+
 /error.log
 
 # IDEs and editors
