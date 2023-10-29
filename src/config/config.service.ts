@@ -11,6 +11,9 @@ export class ConfigService implements IConfigService {
   }
 
   get<T>(key: string): T {
+    if (key === 'PORT' && process.env.NODE_ENV === 'production') {
+      return process.env.PORT_PROD as T;
+    }
     return process.env[key] as T;
   }
 }
