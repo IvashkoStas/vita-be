@@ -6,7 +6,6 @@ import TYPES from 'src/constants/types';
 import { IConfigService } from 'src/config/config.service.interface';
 import { IPrismaService } from 'src/prisma/prisma.service.interface';
 import { ILogger } from 'src/logger/logger.service.interface';
-import { TempController } from 'src/temp/temp.controller';
 import { UserController } from 'src/user/user.controller';
 import { HttpErrorHandler } from 'src/middlewares/http-error-handler';
 import { VitaminController } from 'src/vitamin/vitamin.controller';
@@ -25,7 +24,6 @@ const bootstrap = async (): Promise<void> => {
   await prismaService.connection();
 
   const controllers = [
-    TempController,
     UserController,
     FavoriteController,
     VitaminController,

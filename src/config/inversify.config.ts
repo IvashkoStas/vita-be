@@ -16,7 +16,6 @@ import { VitaminService } from 'src/vitamin/vitamin.service';
 
 import { FavoriteController } from 'src/favorite/favorite.controller';
 import { VitaminController } from 'src/vitamin/vitamin.controller';
-import { TempController } from 'src/temp/temp.controller';
 import { UserController } from 'src/user/user.controller';
 import { AuthHandler } from 'src/middlewares/auth-handler';
 
@@ -37,18 +36,21 @@ const services = new ContainerModule((bind) => {
 });
 
 const controllers = new ContainerModule((bind) => {
-  bind<UserController>(UserController).toSelf();
-  bind<FavoriteController>(FavoriteController).toSelf();
-  bind<VitaminController>(VitaminController).toSelf();
-  bind<TempController>(TempController).toSelf();
+  bind<UserController>(UserController);
+  bind<FavoriteController>(FavoriteController);
+  bind<VitaminController>(VitaminController);
 });
 
 
 const container = new Container({ defaultScope: 'Singleton' });
 
-container.load(middlewares);
-container.load(services);
-container.load(controllers);
+try {
+  container.load(middlewares);
+  container.load(services);
+  container.load(controllers);
+} catch (error) {
+  console.error('Error while configuring the container:', error);
+}
 
 
 export default container;
