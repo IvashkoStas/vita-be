@@ -1,1 +1,1 @@
-Express APP with routing-controllers.js and inversify.js
+Express APP with routing-controllers.js, prisma.js and inversify.js
