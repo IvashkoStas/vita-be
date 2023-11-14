@@ -1,7 +1,7 @@
 {
   "name": "routing-controllers",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express APP with routing-controllers.js, prisma.js and inversify.js",
   "keywords": [],
   "author": "Ivashka Stanislau",
   "license": "ISC",
