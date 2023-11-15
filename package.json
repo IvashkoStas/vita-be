@@ -15,7 +15,7 @@
     "lint:fix": "eslint --cache \"**/*.ts\" --fix"
   },
   "_moduleAliases": {
-    "src": "dist"
+    "src": "src"
   },
   "devDependencies": {
     "@types/express": "^4.17.19",
